@@ -1,1 +1,76 @@
-index.html
+<!--
+<h3>Virtualization Performance Tuning</h3>
+<div class="muted">Reduced I/O latency by 35% on production cluster through kernel tuning and storage-layer optimizations.</div>
+<div class="tags"><span class="tag">Linux</span><span class="tag">Storage</span><span class="tag">Performance</span></div>
+</div>
+
+
+<div class="project">
+<h3>Telco-Cloud Deployment</h3>
+<div class="muted">Architected containerised telco services on Kubernetes with CI/CD and blue/green rollout strategy.</div>
+<div class="tags"><span class="tag">K8s</span><span class="tag">CI/CD</span><span class="tag">Observability</span></div>
+</div>
+</div>
+</section>
+
+
+<section id="blog" class="full">
+<h2>Latest Posts</h2>
+<div id="blog-list" style="display:grid;gap:12px;margin-top:12px">
+<!-- Blog posts are injected by JavaScript -->
+</div>
+<p class="muted" style="margin-top:12px">Want me to add a full blog post here? Edit the posts array in the site source or host Markdown files and update the template to fetch them.</p>
+</section>
+
+
+<section id="contact" class="full">
+<h2>Contact</h2>
+<p class="muted">Interested in collaboration, contracting, or hiring? Reach out at <a id="contact-email" href="mailto:your.email@example.com">your.email@example.com</a>.</p>
+</section>
+
+
+<footer>
+<div class="muted">Made with care • GitHub Pages • Update this site by editing index.html</div>
+</footer>
+</div>
+</div>
+
+
+<script>
+// --- Customize these fields ---
+const profile = {
+name: 'Saurabh Sharma',
+shortBio: 'Software Engineer with 14+ years experience in Virtualization, Telco-cloud, and distributed systems. Passionate about reliability and mentoring teams.',
+resume: 'resume.pdf', // place resume.pdf in repo root or change to external URL
+linkedin: 'https://www.linkedin.com/in/your-profile',
+email: 'your.email@example.com'
+};
+
+
+// Sample blog posts: Order newest first. Edit or replace with your own.
+const posts = [
+{id: 'fault-tolerance-simplified', title: 'Fault Tolerance in Distributed Systems — Simplified', date: '2025-01-15', excerpt: 'A practical guide to designing distributed systems that survive node failures and network partitions.', url: '#'},
+{id: 'telco-cloud-best-practices', title: 'Telco-Cloud: Practical Best Practices', date: '2024-10-02', excerpt: 'Tips and patterns for deploying telco workloads on Kubernetes at scale.', url: '#'}
+];
+
+
+// --- Render profile ---
+document.getElementById('name').textContent = profile.name;
+document.getElementById('short-bio').textContent = profile.shortBio;
+document.getElementById('resume-link').href = profile.resume;
+document.getElementById('linkedin').href = profile.linkedin;
+document.getElementById('email').href = 'mailto:' + profile.email;
+document.getElementById('contact-email').href = 'mailto:' + profile.email;
+
+
+// --- Render blog list ---
+const blogList = document.getElementById('blog-list');
+posts.forEach(p => {
+const el = document.createElement('div');
+el.className = 'blog-item';
+el.innerHTML = `<strong style="display:block">${p.title}</strong><div class="muted" style="margin-top:6px">${p.date} • ${p.excerpt}</div><div style="margin-top:8px"><a class="btn" href="${p.url}">Read</a></div>`;
+blogList.appendChild(el);
+});
+</script>
+</body>
+</html>
