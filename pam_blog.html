@@ -1,0 +1,43 @@
+<p><strong>Purpose:</strong> This blog explains how to create a <strong>dynamic password history</strong> mechanism with PAM (Pluggable Authentication Modules). PAM currently allows configuring a static number of old passwords to prevent reuse, but does not natively support a dynamic model — especially where password changes are restricted to once per day.</p>
+<li>Each time a password changes:
+<ul>
+<li>Backup the current <code>opasswd</code> to <code>opasswd_old</code>.</li>
+<li>Update both <code>opasswd</code> and <code>opasswd_old</code> with the new password entry.</li>
+</ul>
+</li>
+<li>If the configured number of previous passwords changes (increased or decreased):
+<ul>
+<li>Reconstruct <code>opasswd</code> from <code>opasswd_old</code> to match the new required count.</li>
+</ul>
+</li>
+</ol>
+
+
+<div class="note">
+<p><strong>Notes:</strong></p>
+<ul>
+<li>This algorithm works across all PAM versions that use <code>opasswd</code> and <code>oshadow</code>.</li>
+<li>You can also leverage the <code>chage</code> utility for managing password expiry and aging.</li>
+<li><strong>Best practice:</strong> Always create a copy of <code>opasswd</code>, <code>opasswd_old</code>, and <code>oshadow</code> before making changes. Apply modifications on the copy, then rename it back to the original file for safety.</li>
+</ul>
+</div>
+
+
+<h2>🔹 Pros</h2>
+<ul>
+<li>Password history is tied to <strong>days</strong>, making it more flexible.</li>
+<li>Number of previous passwords can be <strong>increased or decreased dynamically</strong>.</li>
+</ul>
+
+
+<h2>🔹 Cons</h2>
+<ul>
+<li>Requires a <strong>fast algorithm</strong> to efficiently update <code>opasswd</code>.</li>
+<li>Scalability concerns: For large numbers of users, file size grows quickly.
+<br><em>Example: With 100 users, each storing 365 passwords (1 year of daily history), the <code>opasswd</code> file will contain 36,500 entries.</em>
+</li>
+</ul>
+
+
+<h2>🔹 Conclusion</h2>
+<p>By integrating both <code>opasswd</code> and <code>oshadow</code>, you can design a <strong>dynamic password history mechanism</strong> on top of PAM’s current capabilities. While this approach increases flexibility and security, it comes with challenges of performance and scalability — making it best suited for systems with a <strong>limited number of users</strong> or specialized compliance requirements.</p>
